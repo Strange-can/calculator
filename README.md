@@ -1,0 +1,1 @@
+Will be using javascript, html and css to build a basic calculator that can perform basic arithmetic methods (addition, subtraction, division and multiplication)

@@ -32,3 +32,9 @@ function operator(num1, mathSymbol, num2) {
         return divide(num1, num2)
     }
 }
+
+const screen = document.querySelector(".display")
+const seenButtons = document.querySelectorAll(".screenDisplay")
+for (const button of seenButtons) {
+    button.addEventListener("click", () => screen.textContent = button.textContent)
+}

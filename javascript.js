@@ -19,6 +19,7 @@ let num2 = ''
 let mathSymbol = ''
 let numbers = '1234567890'
 let symbols = '+-*/'
+let resultStorage = []
 
 function operator(num1, mathSymbol, num2) {
     if (mathSymbol === '+') {
@@ -50,9 +51,9 @@ function calculate() {
     if (symbols.includes(screenArray[i]) && screenArray.indexOf(screenArray[i]) !== 0 && mathSymbol === '') {
         mathSymbol = screenArray[i]
     }
-    else if ( mathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' ) ) {
-        numStr1 += screenArray[i]
-    }
+    else if ( (mathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' )) ) {
+            numStr1 += screenArray[i] 
+      }
     else if ( numbers.includes(screenArray[i]) || (mathSymbol !== '' && symbols.includes(screenArray[i]))) {
         numStr2 += screenArray[i]
     }
@@ -64,13 +65,16 @@ function calculate() {
     console.log(num2)
     let answer = operator(num1, mathSymbol, num2)
     screenArray.splice( 0, screenArray.length )
-    screenArray.push(answer)
+    let stringAns = answer.toString()
+    let resultStorage = stringAns.split('')
+    for (const number of resultStorage) {
+        screenArray.push(number)
+    }
     screen.textContent = ''
-    screen.textContent = screenArray
-    num1 = screenArray[0]
+    screen.textContent = screenArray.join('')
+    num1 = ''
     mathSymbol = ''
     num2 = ''
-
 }
 console.log(screenArray)
 const equalSign = document.querySelector(".equal")

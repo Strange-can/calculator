@@ -53,7 +53,8 @@ let testMathSymbol = ''
 
 const sign = document.querySelectorAll(".sign")
 for (const signButton of sign) {
-    signButton.addEventListener("click", () => {screenArray.push(signButton.textContent)
+    signButton.addEventListener("click", () => {
+        screenArray.push(signButton.textContent)
         screen.textContent = screenArray.join('')
         testEq()
     })
@@ -64,18 +65,12 @@ function testEq() {
         if (symbols.includes(screenArray[i]) && i !== 0 && testMathSymbol === '') {
             testMathSymbol = screenArray[i]
         }
-        else if ( (testMathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' )) ) {
+        else if ( (testMathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
+        || screenArray[i] === '+' || screenArray[i] === '.')) ) {
                 testNumStr1 += screenArray[i] 
           }
-        else if ( numbers.includes(screenArray[i]) || (testMathSymbol !== '' && symbols.includes(screenArray[i]) )) {
-             /*if ( (testNumStr2.includes('-') && screenArray[i] === '-') 
-                || (testNumStr2.includes('+') && screenArray[i] === '+') 
-                || screenArray[i] === '*'
-                || screenArray[i] === '/') {
-                nextSymbol = screenArray[i]
-                screenArray.splice(i, 1)
-                calculate()
-            }*/
+        else if ( numbers.includes(screenArray[i]) || (testMathSymbol !== '' && 
+            (symbols.includes(screenArray[i]) || screenArray[i] === '.'))) {
               testNumStr2 += screenArray[i]
               if ((testNumStr2.endsWith('-') || testNumStr2.endsWith('+') || testNumStr2.endsWith('*') || 
                    testNumStr2.endsWith('/')) && testNumStr2.length > 1) {
@@ -96,10 +91,12 @@ function makeEq() {
         if (symbols.includes(screenArray[i]) && i !== 0 && mathSymbol === '') {
             mathSymbol = screenArray[i]
         }
-        else if ( (mathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' )) ) {
+        else if ( (mathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
+        || screenArray[i] === '+' || screenArray[i] === '.')) ) {
                 numStr1 += screenArray[i] 
           }
-        else if ( numbers.includes(screenArray[i]) || (mathSymbol !== '' && symbols.includes(screenArray[i]) )) {
+        else if ( numbers.includes(screenArray[i]) || (mathSymbol !== '' && 
+            (symbols.includes(screenArray[i]) || screenArray[i] === '.') )) {
             numStr2 += screenArray[i]
             
         }}
@@ -113,6 +110,21 @@ function calculate() {
     if (numStr1 !== '' && mathSymbol !== '' && numStr2 !== '') {
     num1 = Number(numStr1)
     num2 = Number(numStr2)
+    if (num2 === 0) {
+        screen.textContent = ''
+        screen.textContent = 'bruh.' 
+        nextSymbol = ''
+        numStr1 = ''
+        numStr2 = ''
+        num1 = ''
+        mathSymbol = ''
+        num2 = ''
+        testNumStr1 = ''
+        testNumStr2 = ''
+        testMathSymbol = ''
+        screenArray.splice( 0, screenArray.length )
+    }
+    else {
     let answer = operator(num1, mathSymbol, num2)
     screenArray.splice( 0, screenArray.length )
     if (isNaN(answer)) { 
@@ -148,7 +160,7 @@ function calculate() {
     testNumStr1 = ''
     testNumStr2 = ''
     testMathSymbol = ''
-  }
+  }}
 }}
 const equalSign = document.querySelector(".equal")
 equalSign.addEventListener( "click", calculate)
@@ -160,4 +172,34 @@ clearSign.addEventListener("click", () => {
     testNumStr1 = ''
     testNumStr2 = ''
     testMathSymbol = ''
+})
+
+const decimalPoint = document.querySelector(".decimal")
+decimalPoint.addEventListener("click", () => {
+    for ( i = 0; i < screenArray.length; i++ ) {
+        if (symbols.includes(screenArray[i]) && i !== 0 && testMathSymbol === '') {
+            testMathSymbol = screenArray[i]
+        }
+        else if ( (testMathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
+        || screenArray[i] === '+' || screenArray[i] === '.')) ) {
+                testNumStr1 += screenArray[i] 
+        }
+        else if ( numbers.includes(screenArray[i]) || (testMathSymbol !== '' && 
+            (symbols.includes(screenArray[i]) || screenArray[i] === '.') )) {
+              testNumStr2 += screenArray[i]
+        }
+}
+    if (testNumStr1.includes('.') === false && testNumStr2 === '') {
+        screenArray.push(decimalPoint.textContent)
+        screen.textContent = screenArray.join('')
+    }
+    else if (testNumStr2.includes('.') === false && testNumStr2 !== '') {
+        screenArray.push(decimalPoint.textContent)
+        screen.textContent = screenArray.join('')
+    }
+    else { return }
+        testNumStr1 = ''
+        testNumStr2 = ''
+        testMathSymbol = ''
+
 })

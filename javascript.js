@@ -141,6 +141,10 @@ function calculate() {
         testMathSymbol = ''
     }
     else {
+        if (Number.isInteger(answer) === false) {
+            estimate = Math.round(answer * 100000)/100000
+            answer = estimate
+        }
     let stringAns = answer.toString()
     let resultStorage = stringAns.split('')
     for (const number of resultStorage) {
@@ -193,7 +197,7 @@ decimalPoint.addEventListener("click", () => {
         screenArray.push(decimalPoint.textContent)
         screen.textContent = screenArray.join('')
     }
-    else if (testNumStr2.includes('.') === false && testNumStr2 !== '') {
+    else if (testNumStr2.includes('.') === false && testMathSymbol !== '') {
         screenArray.push(decimalPoint.textContent)
         screen.textContent = screenArray.join('')
     }

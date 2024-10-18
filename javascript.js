@@ -62,7 +62,7 @@ for (const signButton of sign) {
 
 function testEq() {
     for ( i = 0; i < screenArray.length; i++ ) {
-        if (symbols.includes(screenArray[i]) && i !== 0 && testMathSymbol === '') {
+        if (symbols.includes(screenArray[i]) && testNumStr1 !== '' && testMathSymbol === '') {
             testMathSymbol = screenArray[i]
         }
         else if ( (testMathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
@@ -80,15 +80,14 @@ function testEq() {
                    }
             
         }}
-    if ( testNumStr2 === '') {
+       testNumStr2 = ''
        testNumStr1 = ''
        testMathSymbol = ''
-    }
 }
 
 function makeEq() {
     for ( i = 0; i < screenArray.length; i++ ) {
-        if (symbols.includes(screenArray[i]) && i !== 0 && mathSymbol === '') {
+        if (symbols.includes(screenArray[i]) && numStr1 !== '' && mathSymbol === '') {
             mathSymbol = screenArray[i]
         }
         else if ( (mathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
@@ -181,7 +180,7 @@ clearSign.addEventListener("click", () => {
 const decimalPoint = document.querySelector(".decimal")
 decimalPoint.addEventListener("click", () => {
     for ( i = 0; i < screenArray.length; i++ ) {
-        if (symbols.includes(screenArray[i]) && i !== 0 && testMathSymbol === '') {
+        if (symbols.includes(screenArray[i]) && testNumStr1 !== '' && testMathSymbol === '') {
             testMathSymbol = screenArray[i]
         }
         else if ( (testMathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
@@ -201,7 +200,6 @@ decimalPoint.addEventListener("click", () => {
         screenArray.push(decimalPoint.textContent)
         screen.textContent = screenArray.join('')
     }
-    else { return }
         testNumStr1 = ''
         testNumStr2 = ''
         testMathSymbol = ''

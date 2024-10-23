@@ -68,8 +68,8 @@ function testEq() {
         }
         else if ( testMathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
         || screenArray[i] === '+' || screenArray[i] === '.') ) {
-                if ( (testNumStr1.includes('+') || testNumStr1.includes('-')) 
-                    && (screenArray[i] === '-' || screenArray[i] === '+' || testNumStr2.includes('.')) ) {
+                if ( (testNumStr1.includes('+') || testNumStr1.includes('-') || testNumStr1.includes('.')) 
+                    && (screenArray[i] === '-' || screenArray[i] === '+') ) {
                         screenArray.splice( i, 1 )
                     }
                 else    {testNumStr1 += screenArray[i]}

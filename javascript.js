@@ -69,18 +69,21 @@ function testEq() {
         else if ( testMathSymbol === '' && (numbers.includes(screenArray[i]) || screenArray[i] === '-' 
         || screenArray[i] === '+' || screenArray[i] === '.') ) {
                 if ( (testNumStr1.includes('+') || testNumStr1.includes('-')) 
-                    && (screenArray[i] === '-' || screenArray[i] === '+') ) {
+                    && (screenArray[i] === '-' || screenArray[i] === '+' || testNumStr2.includes('.')) ) {
                         screenArray.splice( i, 1 )
                     }
                 else    {testNumStr1 += screenArray[i]}
           }
         else if ( numbers.includes(screenArray[i]) || (testMathSymbol !== '' && 
             (symbols.includes(screenArray[i]) || screenArray[i] === '.'))) {
-            if ( (testNumStr2.includes('+') || testNumStr2.includes('-')) 
+            if ( (testNumStr2.includes('+') || testNumStr2.includes('-') || testNumStr2.includes('.')) 
                   && (symbols.includes(screenArray[i])) 
                   && !Number.isNaN(Number(testNumStr2)) === false) {
                     screenArray.splice( i, 1 )
                 }
+            else if ( testNumStr2 === '' && (screenArray[i] === '*' || screenArray[i] === '/')) {
+                screenArray.splice( i, 1 )
+            }
             else if (symbols.includes(screenArray[i])
                      && !Number.isNaN(Number(testNumStr2)) === true && testNumStr2 !== '') {
                     nextSymbol = screenArray[screenArray.length - 1]
@@ -94,6 +97,9 @@ function testEq() {
             screenArray.splice( i, 1 )
         }
     }
+    console.log(testNumStr1)
+    console.log(testMathSymbol)
+    console.log(testNumStr2)
        testNumStr2 = ''
        testNumStr1 = ''
        testMathSymbol = ''

@@ -55,8 +55,8 @@ const sign = document.querySelectorAll(".sign")
 for (const signButton of sign) {
     signButton.addEventListener("click", () => {
         screenArray.push(signButton.textContent)
-        screen.textContent = screenArray.join('')
         testEq()
+        screen.textContent = screenArray.join('')
     })
 }
 
@@ -70,7 +70,7 @@ function testEq() {
                 testNumStr1 += screenArray[i] 
           }
         else if ( numbers.includes(screenArray[i]) || (testMathSymbol !== '' && 
-            (symbols.includes(screenArray[i]) || screenArray[i] === '.'))) {
+            (screenArray[i] === '+' || screenArray[i] === '-' || screenArray[i] === '.'))) {
               testNumStr2 += screenArray[i]
               if ((testNumStr2.endsWith('-') || testNumStr2.endsWith('+') || testNumStr2.endsWith('*') || 
                    testNumStr2.endsWith('/')) && testNumStr2.length > 1) {
@@ -79,7 +79,11 @@ function testEq() {
                     calculate()
                    }
             
-        }}
+        }
+        else {
+            screenArray.splice( i, 1 )
+        }
+    }
        testNumStr2 = ''
        testNumStr1 = ''
        testMathSymbol = ''
